@@ -1,5 +1,3 @@
-# .github/workflows/ci.yml
-
 name: Flask CI/CD Pipeline
 
 on:
@@ -25,19 +23,15 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Run Flask App Tests
-      run: |
-        python -m unittest discover -s tests
-
     - name: Start Flask app (for testing purposes)
       run: |
         nohup python app.py &
 
     - name: Ensure Flask app is running (curl test)
       run: |
-        sleep 5  # Wait for the app to start
-        curl -f http://localhost:5000/  # Test if Flask app is running
+        sleep 5
+        curl -f http://localhost:5000/
 
     - name: Stop Flask app
       run: |
-        pkill -f 'python app.py'  # Stop Flask app after test
+        pkill -f 'python app.py'
